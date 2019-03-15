@@ -32,7 +32,7 @@ for ig = 1:ngaus
     
     %Calculation elemental force vector
 
-    fe = fe + SourceTerm(x_ig)*N_ig'*dvolume;
+    fe = fe + SourceTerm(x_ig,Example)*N_ig'*dvolume;
 end
 
 
