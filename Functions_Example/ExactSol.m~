@@ -11,7 +11,7 @@ if Example.ID == 1
     u_y = ones(size(X,1),1);
 elseif Example.ID == 2
     u = (1./2000)*h(X(:,1)).*h(X(:,2));
-    
+    u_x = (1./2000)*dh(X(:,1)).*h(X(:,2))+(1./2000)*dh(X(:,1)).*h(X(:,2))
 % elseif Example.ID == 3
 %     x = X(:,1); y = X(:,2);
 %     u = (1-cos(2*pi*x)).*sin(2*pi*y);

@@ -8,10 +8,10 @@ exID = 2;
 Example = SetExample(exID);
 
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
-elementDegree = 1;
+elementDegree = 2;
 dom = Example.dom;
-nx = 40;
-ny = 40;
+nx = 20;
+ny = 20;
 
 [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
 
@@ -24,23 +24,22 @@ npt = size(X,1); ndof = npt;
 [K,f] = BuildSystem(X,T,RefElement,Example);
 
 ndofT = size(K,1); 
+% Apply Neumann Boundary conditions
+% g = 1;
+% Nborder = NeumannFaces(X,1);
+% fe = zeros(2,1);
+% for i = 1:(size(Nborder,1)-1)
+%     length = Nborder(i+1,2:3)-Nborder(i,2:3);
+%     Xb = (Nborder(i+1,2:3)+Nborder(i,2:3))/2;
+      
+%     fe = fe + NBC(Xb,Example)*length/2*[1,1]';
+%     f(Nborder(i,1))= fe(1);
+%     f(Nborder(i+1,1))= fe(2);
+% end
 
 
 % Dirichlet boundary conditions
 C = ApplyDBCs(X,Example,1e-6); 
-
-% % Apply Neumann Boundary conditions
-g = 1;
-Nborder = NeumannFaces(X,1);
-fe = zeros(2,1);
-for i = 1:(size(Nborder,1)-1)
-    length = Nborder(i+1,2:3)-Nborder(i,2:3);
-    Xb = (Nborder(i+1,2:3)+Nborder(i,2:3))/2;
-      
-    fe = fe + NBC(Xb,Example)*length/2*[1,1]';
-    f(Nborder(i,1))= fe(1);
-    f(Nborder(i+1,1))= fe(2);
-end
 
 % Solution
 u = Solver(K,f,C); 

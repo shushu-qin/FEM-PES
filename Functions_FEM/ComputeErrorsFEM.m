@@ -52,8 +52,10 @@ for ig = 1:ngaus
     uh = N_ig*u_e(:,1); uh_x = nx*u_e(:,1); uh_y = ny*u_e(:,1); 
 
     pt_xy = N_ig(:,1:nen)*[xe, ye]; 
-    [u,u_x,u_y] = ExactSol(pt_xy,Example);
-    
+    u = ExactSol(pt_xy,Example);
+    du = NBC(pt_xy,Example);
+    u_x = du(1);
+    u_y = du(2);
     normL2_e = normL2_e + (u^2 )*dvolume; 
     normH1_e = normH1_e + (u_x^2)*dvolume; 
     errL2_e = errL2_e + ((u - uh)^2 )*dvolume; 
