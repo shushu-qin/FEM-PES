@@ -11,11 +11,11 @@ if elementType == 1
     if elementDegree == 1
         nen = 3;
         Element.name   ='TRIP1'; %%%%%%
-        ngaus = 3;
+        ngaus = 1;
     elseif elementDegree == 2
         nen = 6;
         Element.name   = 'TRIP2'; %%%%%%
-        ngaus = 7;
+        ngaus = 3;
     else
         error ('Error in ShapeFunc: unavailable triangle');
     end
@@ -23,11 +23,11 @@ elseif elementType == 0
     if elementDegree == 1
         nen = 4;
         Element.name   = 'QUAP1'; %%%%%%
-        ngaus = 16;
+        ngaus = 4;
     elseif elementDegree == 2
         nen = 9;
         Element.name   = 'QUAP2'; %%%%%%
-        ngaus = 16;
+        ngaus = 9;
     else
         error ('Error in ShapeFunc: unavailable quadrilateral');
     end

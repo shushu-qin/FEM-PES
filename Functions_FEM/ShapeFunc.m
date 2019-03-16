@@ -24,11 +24,7 @@ if nen == 0
     Neta = zeros(ngaus,0); 
 else
     if elem == 0   % quadrilateral
-        if nen == 1  %Q0
-            N    = vect1;
-            Nxi  = vect0;
-            Neta = vect0;
-        elseif nen == 4  %Q1
+        if nen == 4  %Q1
             N    = [(1-xi).*(1-eta)/4, (1+xi).*(1-eta)/4, ...
                     (1+xi).*(1+eta)/4, (1-xi).*(1+eta)/4]; 
             Nxi  = [(eta-1)/4, (1-eta)/4, (1+eta)/4, -(1+eta)/4]; 
@@ -54,32 +50,14 @@ else
             error ('Error in ShapeFunc: unavailable quadrilateral')
         end
     elseif elem == 1  % triangle
-        if nen == 1  %P0
-            N    = vect1;
-            Nxi  = vect0;
-            Neta = vect0;
-        elseif nen == 3  %P1
+        if nen == 3  %P1
             N    = [xi,eta,1-(xi+eta)]; 
             Nxi  = [vect1, vect0, -vect1]; 
             Neta = [vect0, vect1, -vect1]; 
         elseif nen == 6  %P2
             N    = [xi.*(2*xi-1),eta.*(2*eta-1),(1-2*(xi+eta)).*(1-(xi+eta)),4*xi.*eta,4*eta.*(1-(xi+eta)),4*xi.*(1-(xi+eta))]; 
             Nxi  = [4*xi-1,vect0,-3+4*(xi+eta),4*eta,-4*eta,4*(1-2*xi-eta)]; 
-            Neta = [vect0,4*eta-1,-3+4*(xi+eta),4*xi,4*(1-xi-2*eta),-4*xi]; 
-%         elseif nen == 4  %P1+
-%             N    = [xi,eta,1-(xi+eta),27*xi.*eta.*(1-xi-eta)]; 
-%             Nxi  = [vect1, vect0, -vect1, 27*eta.*(1-2*xi-eta)]; 
-%             Neta = [vect0, vect1, -vect1, 27*xi.*(1-2*eta-xi)]; 
-%         elseif nen == 7 %P2+
-%             N    = [xi.*(2*xi-1)	eta.*(2*eta-1)          (1-2*(xi+eta)).*(1-(xi+eta))	...
-%                     4*xi.*eta       4*eta.*(1-(xi+eta))     4*xi.*(1-(xi+eta))              ...
-%                     27*xi.*eta.*(1-xi-eta)]; 
-%             Nxi  = [4*xi-1          vect0                   -3+4*(xi+eta)                   ...
-%                     4*eta           -4*eta                  4*(1-2*xi-eta)                  ...
-%                     27*eta.*(1-2*xi-eta)]; 
-%             Neta = [vect0           4*eta-1                 -3+4*(xi+eta)                   ...
-%                     4*xi            4*(1-xi-2*eta)          -4*xi                           ...
-%                     27*xi.*(1-2*eta-xi)]; 
+            Neta = [vect0,4*eta-1,-3+4*(xi+eta),4*xi,4*(1-xi-2*eta),-4*xi];
         else
             error ('Error in ShapeFunc: unavailable triangle')
         end
