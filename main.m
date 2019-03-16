@@ -10,8 +10,8 @@ Example = SetExample(exID);
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
 elementDegree = 1;
 dom = Example.dom;
-nx = 80;
-ny = 80;
+nx = 40;
+ny = 40;
 
 [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
 
@@ -50,9 +50,9 @@ trisurf(T,X(:,1),X(:,2),u(:,1));
 title('u','FontSize',12)
 
 % Plot of u_ex
-figure(2);
-trisurf(T,X(:,1),X(:,2),u_ex(:,1)); 
-title('u_ex','FontSize',12)
+% figure(2);
+% trisurf(T,X(:,1),X(:,2),u_ex(:,1)); 
+% title('u_ex','FontSize',12)
 
 %L2 and H1 errors
 [errL2, errH1] = ComputeErrorsFEM(X,T,u,RefElement,Example);
