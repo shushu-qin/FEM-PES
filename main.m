@@ -4,14 +4,14 @@ clear all; close all; %clc
 
 setpath;
 
-exID = 3;
+exID = 2;
 Example = SetExample(exID);
 
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
 elementDegree = 1;
 dom = Example.dom;
-nx = 40;
-ny = 40;
+nx = 80;
+ny = 80;
 
 [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
 
@@ -29,18 +29,8 @@ ndofT = size(K,1);
 % Dirichlet boundary conditions
 C = ApplyDBCs(X,Example,1e-6); 
 
-% % Apply Neumann Boundary conditions
-g = 1;
-Nborder = NeumannFaces(X,1);
-fe = zeros(2,1);
-for i = 1:(size(Nborder,1)-1)
-    length = Nborder(i+1,2:3)-Nborder(i,2:3);
-    Xb = (Nborder(i+1,2:3)+Nborder(i,2:3))/2;
-      
-    fe = fe + NBC(Xb,Example)*length/2*[1,1]';
-    f(Nborder(i,1))= fe(1);
-    f(Nborder(i+1,1))= fe(2);
-end
+% Apply Neumann Boundary conditions
+f = Neumann(f,X,Example);
 
 % Solution
 u = Solver(K,f,C); 
@@ -55,9 +45,14 @@ u_ex = ExactSol(X,Example);
 % set(gca, 'FontSize', 16);
 
 % Plot of u
-figure; 
+figure(1); 
 trisurf(T,X(:,1),X(:,2),u(:,1)); 
 title('u','FontSize',12)
+
+% Plot of u_ex
+figure(2);
+trisurf(T,X(:,1),X(:,2),u_ex(:,1)); 
+title('u_ex','FontSize',12)
 
 %L2 and H1 errors
 [errL2, errH1] = ComputeErrorsFEM(X,T,u,RefElement,Example);
