@@ -57,7 +57,7 @@ for ig = 1:ngaus
     u_x = du(1);
     u_y = du(2);
     normL2_e = normL2_e + (u^2 )*dvolume; 
-    normH1_e = normH1_e + (u_x^2)*dvolume; 
+    normH1_e = normH1_e + (u_x^2+u_y^2)*dvolume; 
     errL2_e = errL2_e + ((u - uh)^2 )*dvolume; 
-    errH1_e = errH1_e + ((u_x-uh_x)^2)*dvolume; 
+    errH1_e = errH1_e + ((u_x-uh_x)^2+(u_y-uh_y)^2)*dvolume; 
 end

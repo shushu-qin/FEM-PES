@@ -1,7 +1,9 @@
 function s = SourceTerm(X,Example)
 x = X(1); y = X(2);
-s = 0;
-if Example.ID== 2
+
+if Example.ID== 1
+    s = 0;
+elseif Example.ID== 2
     x=X(:,1); y=X(:,2);
     s = -(1/2000)*(ddh(x).*h(y)+h(x).*ddh(y));
 % elseif Example.ID== 3

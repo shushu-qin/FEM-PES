@@ -5,13 +5,14 @@ clear all; close all; %clc
 setpath;
 
 exID = 2;
-Example = SetExample(exID);
+BC = 2; % 1: all Dirichlet; 2: top-bottom Neumann
+Example = SetExample(exID,BC);
 
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
 elementDegree = 1;
 dom = Example.dom;
-nx = 40;
-ny = 40;
+nx = 10;
+ny = 10;
 
 [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
 
