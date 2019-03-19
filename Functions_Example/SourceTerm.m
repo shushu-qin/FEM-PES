@@ -6,8 +6,8 @@ if Example.ID== 1
 elseif Example.ID== 2
     x=X(:,1); y=X(:,2);
     s = -(1/2000)*(ddh(x).*h(y)+h(x).*ddh(y));
-% elseif Example.ID== 3
-%     s=4*pi^2*cos(2*pi*x)*sin(2*pi*y) + 4*pi^2*sin(2*pi*y)*(cos(2*pi*x) - 1);
+elseif Example.ID== 3
+    s= (y-0.5)*sin(x-0.5)+(x-0.5)*sin(y-0.5);
 end
 
 function y=ddh(x)

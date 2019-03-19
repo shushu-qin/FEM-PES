@@ -12,10 +12,10 @@ if Example.ID == 1
 elseif Example.ID == 2
     u = (1./2000)*h(X(:,1)).*h(X(:,2));
     
-% elseif Example.ID == 3
-%     x = X(:,1); y = X(:,2);
-%     u = (1-cos(2*pi*x)).*sin(2*pi*y);
-% 
+elseif Example.ID == 3
+    x = X(:,1); y = X(:,2);
+    u = (y-0.5).*sin(x-0.5)+(x-0.5).*sin(y-0.5);
+
 end
 end
      

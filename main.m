@@ -4,15 +4,15 @@ clear all; close all; %clc
 
 setpath;
 
-exID = 2;
+exID = 3;
 BC = 2; % 1: all Dirichlet; 2: top-bottom Neumann
 Example = SetExample(exID,BC);
 
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
-elementDegree = 1;
+elementDegree = 2;
 dom = Example.dom;
-nx = 10;
-ny = 10;
+nx = 5;
+ny = 5;
 
 [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
 
@@ -31,7 +31,7 @@ ndofT = size(K,1);
 C = ApplyDBCs(X,Example,1e-6); 
 
 % Apply Neumann Boundary conditions
-f = Neumann(f,X,Example);
+f = Neumann(f,X,Example,elementDegree);
 
 % Solution
 u = Solver(K,f,C); 
@@ -47,13 +47,12 @@ u_ex = ExactSol(X,Example);
 
 % Plot of u
 figure(1); 
-trisurf(T,X(:,1),X(:,2),u(:,1)); 
-title('u','FontSize',12)
+plotU(elementType,elementDegree,X,T,u); 
 
 % Plot of u_ex
-% figure(2);
-% trisurf(T,X(:,1),X(:,2),u_ex(:,1)); 
-% title('u_ex','FontSize',12)
+figure(2);
+plotU(elementType,elementDegree,X,T,u_ex);  
+title('u_ex','FontSize',12)
 
 %L2 and H1 errors
 [errL2, errH1] = ComputeErrorsFEM(X,T,u,RefElement,Example);

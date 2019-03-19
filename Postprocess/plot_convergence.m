@@ -7,11 +7,11 @@ exID = 2;
 BC = 1; % 1: all Dirichlet; 2: top-bottom Neumann
 Example = SetExample(exID,BC);
 
-elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
-elementDegree = 1;
+elementType = 1; % elementType: 0 for quadrilateral and 1 for triangles
+elementDegree = 2;
 dom = Example.dom;
-nx = 4;
-ny = 4;
+nx = 2;
+ny = 2;
 nmesh = 4;
 sizeOfElem = zeros(nmesh,1);
 L2u = zeros(nmesh,1);
@@ -36,7 +36,7 @@ for i = 1:nmesh
     C = ApplyDBCs(X,Example,1e-6); 
 
     % Apply Neumann Boundary conditions
-    f = Neumann(f,X,Example);
+    f = Neumann(f,X,Example,elementDegree);
 
     % Solution
     u = Solver(K,f,C); 
