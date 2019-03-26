@@ -5,13 +5,17 @@ clear all; close all; %clc
 setpath;
 
 exID = 1;
-BC = 2; % 1: all Dirichlet; 2: top-bottom Neumann
-Example = SetExample(exID,BC);
-
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
 elementDegree = 1;
-dom = Example.dom;
+% BC = 2; % 1: all Dirichlet; 2: top-bottom Neumann
+% nx = 2;
+% ny = 2;
 
+
+% [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
+file_name = cinput('Name of the mesh file: ','example1.mat'); 
+load(file_name);
+Example = SetExample(exID,zeroNodes,inflowEdges,outflowEdges);
 
 RefElement = ReferenceElement(elementType,elementDegree);
 fprintf('\n%s\n',RefElement.name);
