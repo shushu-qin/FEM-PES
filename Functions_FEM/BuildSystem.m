@@ -6,7 +6,6 @@ function [K,f] = BuildSystem(X,T,RefElement,Example)
 % RefElement: properties of the reference element
 % Example: properties of the problem being solved
 
-k=Example.k;
 nen  = RefElement.nen; 
 nelem = size(T,1); 
 

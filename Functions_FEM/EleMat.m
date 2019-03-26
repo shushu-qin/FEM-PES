@@ -26,13 +26,13 @@ for ig = 1:ngaus
     %Calculation elemental force vector
 
     Ngp_xy = J\[Nxi_ig;Neta_ig]; %Value of shape functions with respect to x and y in gauss point
-    
-    Ke = Ke + Ngp_xy'*k*Ngp_xy*dvolume;
     x_ig = N_ig*Xe;
+    Ke = Ke + Ngp_xy'*k(x_ig(1),x_ig(2))*Ngp_xy*dvolume;
+    
     
     %Calculation elemental force vector
 
-    fe = fe + SourceTerm(x_ig,Example)*N_ig'*dvolume;
+%     fe = fe + SourceTerm(x_ig,Example)*N_ig'*dvolume;
 end
 
 

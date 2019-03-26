@@ -1,25 +1,15 @@
-function example = SetExample(exID,BC)
+function example = SetExample(exID,dom,zeroNodes,inflowEdges,outflowEdges)
 % 
 % example = SetExample()
 % Domain description, material properties
 
 
-example.k = 1;
-example.ID =exID;
-example.dom = [0,1,0,1];
+example.k = @(x,y) 1-3.95*y^2;
+example.ID = exID;
+example.dom = dom;
 
-switch BC
-    case 1
-        example.DBC = [1,1,1,1];
-        example.NBC = [0,0,0,0];
-    case 2
-        example.DBC = [0,1,0,1];
-        example.NBC = [1,0,1,0];
-%     case 3
-%         example.DBC = [0,1,0,1];
-%         example.NBC = [1,0,1,0];
-    
-end
-    
+example.zeroNodes = zeroNodes;
+example.inflowEdges = inflowEdges;
+example.outflowEdges = outflowEdges;    
 
 
