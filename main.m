@@ -5,7 +5,6 @@ clear all; close all; %clc
 setpath;
 
 exID = 1;
-dom = [0,1,0,1];
 elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
 elementDegree = 1;
 % BC = 2; % 1: all Dirichlet; 2: top-bottom Neumann
@@ -15,7 +14,7 @@ elementDegree = 1;
 
 % [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
 load('example1.mat');
-Example = SetExample(exID,dom,zeroNodes,inflowEdges,outflowEdges);
+Example = SetExample(exID,zeroNodes,inflowEdges,outflowEdges);
 
 RefElement = ReferenceElement(elementType,elementDegree);
 fprintf('\n%s\n',RefElement.name);
