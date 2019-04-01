@@ -3,10 +3,10 @@ inflowEdges = Example.inflowEdges;
 outflowEdges = Example.outflowEdges;
 for j = 1:2
     if j==1
-        Nborder = inflowEdges';
+        Nborder = inflowEdges;
         g = -1;
     elseif j==2
-        Nborder = outflowEdges';
+        Nborder = outflowEdges;
         g = 1;
     end
     if elementDegree ==1
@@ -33,8 +33,12 @@ for j = 1:2
                 dlength=wgp(ig)*J;
                 fe = fe + g*N_ig'*dlength;
             end
-            indx = Nborder(i,1):Nborder(i+1,1);
-            f(indx)= f(indx) + fe;
+%             indx = Nborder(i,1):Nborder(i+1,1);
+%             f(indx)= f(indx) + fe;
+            indx1 = Nborder(i,1);
+            indx2 = Nborder(i+1,1);
+            f(indx1)= f(indx1) + fe(1);
+            f(indx2)= f(indx2) + fe(2);
         end
     elseif elementDegree == 2
         for i = 1:2:size(Nborder,1)-2

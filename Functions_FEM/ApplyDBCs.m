@@ -8,6 +8,6 @@ zeroNodes = Example.zeroNodes;
 C = zeros(length(zeroNodes),2);
 for i = 1:size(zeroNodes,1)
     C(i,1) = zeroNodes(i,1);
-    C(i,2) = zeroNodes(i,2); % assign 0
+    C(i,2) = 0; % assign 0
 end
 

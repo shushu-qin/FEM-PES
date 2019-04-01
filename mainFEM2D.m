@@ -5,7 +5,7 @@ clear all; close all; %clc
 setpath;
 
 exID = 1;
-elementType = 0; % elementType: 0 for quadrilateral and 1 for triangles
+elementType = 1; % elementType: 0 for quadrilateral and 1 for triangles
 elementDegree = 1;
 % BC = 2; % 1: all Dirichlet; 2: top-bottom Neumann
 % nx = 2;
@@ -13,7 +13,8 @@ elementDegree = 1;
 
 
 % [X,T] = createRectangleMesh(dom,elementType,elementDegree,nx,ny);
-file_name = cinput('Name of the mesh file: ','example1.mat'); 
+% file_name = cinput('Name of the mesh file: ','example1.mat'); 
+file_name = 'meshHW1c.mat';
 load(file_name);
 Example = SetExample(exID,zeroNodes,inflowEdges,outflowEdges);
 
@@ -50,12 +51,12 @@ u_ex = ExactSol(X,Example);
 figure(1); 
 plotU(elementType,elementDegree,X,T,u); 
 
-% Plot of u_ex
-figure(2);
-plotU(elementType,elementDegree,X,T,u_ex);  
-title('u_ex','FontSize',12)
+% % Plot of u_ex
+% figure(2);
+% plotU(elementType,elementDegree,X,T,u_ex);  
+% title('u_ex','FontSize',12)
 
-%L2 and H1 errors
-[errL2, errH1] = ComputeErrorsFEM(X,T,u,RefElement,Example);
-fprintf('\nL2 error = %0.2e    H1 error=%0.2e\n',errL2,errH1);
-WritingFile(X,T,u,u_ex);
+% %L2 and H1 errors
+% [errL2, errH1] = ComputeErrorsFEM(X,T,u,RefElement,Example);
+% fprintf('\nL2 error = %0.2e    H1 error=%0.2e\n',errL2,errH1);
+% WritingFile(X,T,u,u_ex);
