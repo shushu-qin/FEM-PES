@@ -41,9 +41,12 @@ for j = 1:2
             f(indx2)= f(indx2) + fe(2);
         end
     elseif elementDegree == 2
-        for i = 1:2:size(Nborder,1)-2
+        for i = 1:length(Nborder)
             fe = zeros(3,1);
-            lengthSide = norm(Nborder(i+1,2:3)-Nborder(i,2:3));
+            X1 = X(Nborder(i,1),:);
+            X2 = X(Nborder(i,2),:);
+            X3 = X(Nborder(i,3),:);
+            lengthSide = norm(X3-X1);
 %             Xb = (Nborder(i+1,2:3)+Nborder(i,2:3))/2;
             nIntPoints = 1;
             shapeFun = ShapeFunc1D(elementDegree);
@@ -52,7 +55,7 @@ for j = 1:2
             N = shapeFun.N; 
             Nxi =shapeFun.Nxi;
 
-            Xe = [Nborder(i,2:3);Nborder(i+1,2:3);Nborder(i+2,2:3)];
+            Xe = [X1;X2;X3];
             xe = Xe(:,1); ye = Xe(:,2);
             for ig = 1:length(wgp)
                 N_ig    = N(ig,:);
@@ -61,9 +64,9 @@ for j = 1:2
                 %Jacobian matrix
                 J = Nxi_ig*Xe(:,1); %Jacobian in 1D             
                 dlength=wgp(ig)*J;
-                fe = fe + n*NBC(x_ig,Example)*N_ig'*dlength;
+                fe = fe + g*N_ig'*dlength;
             end
-            indx = Nborder(i,1):Nborder(i+2,1);
+            indx = Nborder(i,:);
             f(indx)= f(indx) + fe;
 
         end

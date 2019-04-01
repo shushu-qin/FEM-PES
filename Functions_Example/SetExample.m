@@ -1,11 +1,11 @@
-function example = SetExample(exID,zeroNodes,inflowEdges,outflowEdges)
+function example = SetExample(exID,zeroNodes,inflowEdges,outflowEdges,k)
 % 
 % example = SetExample()
 % Domain description, material properties
 
 
-example.k = @(x,y) 1-3.95*y^2;
-% example.k = @(x,y) 1;
+example.k = k;
+
 example.ID = exID;
 
 example.zeroNodes = zeroNodes;

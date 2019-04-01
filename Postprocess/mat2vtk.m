@@ -62,12 +62,12 @@ for i = 1:numNodes
 end
 fprintf(fileID,'\n');
 
-% print velocity vector
-fprintf(fileID,'VECTORS velo float\n');
-for i = 1:numNodes
-    fprintf(fileID,'%16.8e     %16.8e     %16.8e  \n',v(i,:),0);
-end
-fprintf(fileID,'\n');
-fclose(fileID);
+% % print velocity vector
+% fprintf(fileID,'VECTORS velo float\n');
+% for i = 1:numNodes
+%     fprintf(fileID,'%16.8e     %16.8e     %16.8e  \n',v(i,:),0);
+% end
+% fprintf(fileID,'\n');
+% fclose(fileID);
 
 
