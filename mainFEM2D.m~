@@ -52,11 +52,13 @@ figure(1);
 
 plotU(elementType,elementDegree,X,T,u); 
 alpha(0.8)
-
-% Vector Plot of gradient of u
 figure(2);
+[Xcenter ux,uy] = GradU(X,T,RefElement,Example,u);
+PlotMesh(T,X,1,'k-');
+hold on;
 scalefactor = 0.05;
-plotVector(scalefactor,X,T,RefElement,Example,elementType,u);
+quiver(Xcenter(:,1),Xcenter(:,2),ux*scalefactor,uy*scalefactor,'b-','Linewidth',1,'AutoScale','off')% % Plot of u_ex
+
 
 % write vtk file for paraview
 mat2vtk(u,[ux,uy],T,X);

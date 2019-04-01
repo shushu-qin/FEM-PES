@@ -17,3 +17,5 @@ else
 trisurf(T,X(:,1),X(:,2),u(:,1));
 title('u','FontSize',12)
 end
+colormap(jet);
+view(0,90);
