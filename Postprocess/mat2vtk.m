@@ -1,7 +1,7 @@
-function mat2vtk(p,v,T,X)
+function mat2vtk(p,v,T,X,elementDegree)
 % open a vtk file
 example = 'HW2c';
-vtkFile = sprintf('%s.vtk',example);
+vtkFile = sprintf('%s_P%d.vtk',example,elementDegree);
 fileID = fopen (vtkFile, 'w');
 typeMesh = 'VTK_TRIANGLE';
 typeID = 0;

@@ -39,7 +39,7 @@ for ielem = 1:nelem % Loop in elements
     end
     Xcenter(ielem,1)=sum(xe)/nen;
     Xcenter(ielem,2)=sum(ye)/nen;
-    gradU(ielem,:) = gradUe;
+    gradU(ielem,:) = gradUe/ngaus;
 end
 ux = gradU(:,1);
 uy = gradU(:,2);

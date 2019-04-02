@@ -1,6 +1,6 @@
 % Politecnical University of Catalunya
 % Course name: Programming for Engineers and Scientists
-% Students: Raul Bravo Shushu QinArthur Lustman Marina Vilardell
+% Students: Raul Bravo Shushu Qin Arthur Lustman Marina Vilardell
 % Program to solve a Poisson equation problem in a fluid using the FEM 
 % (Finite Element Method)
 % 
@@ -18,11 +18,14 @@ setpath;
 scratchfolder = 'plots' % scratch folder to save the plots
 exID = 1;
 elementType = 1; % elementType: 0 for quadrilateral and 1 for triangles
-elementDegree =1;
+elementDegree =2;
 k = @(x,y) 1-3.95*y^2;
 kk = 99; % 99: function
-
-file_name = 'meshHW1c.mat';
+if elementDegree ==1
+    file_name = 'meshHW1c.mat';
+else 
+    file_name = 'meshHW1cquad.mat';
+end
 load(file_name);
 Example = SetExample(exID,zeroNodes,inflowEdges,outflowEdges,k);
 
@@ -51,15 +54,16 @@ figure(1);
 plotU(elementType,elementDegree,X,T,u); 
 alpha(0.8);
 caxis([-1 1]);
-eval(sprintf('saveas(gcf,''%s/Ufield_k%d_P1.png'')',scratchfolder,kk));
+eval(sprintf('saveas(gcf,''%s/Ufield_k%d_P%d.png'')',scratchfolder,kk,elementDegree));
 % Vector Plot of gradient of u
 figure(2);
 [Xcenter ux uy] = GradU(X,T,RefElement,Example,u);
-PlotMesh(T,X,elementType,'k-');
+
 hold on;
 scalefactor = 0.05;
-plotVector(scalefactor,Xcenter,ux,uy);
-eval(sprintf('saveas(gcf,''%s/vectorGradU_k%d_P1.png'')',scratchfolder,kk));
+ plotVector(scalefactor,Xcenter,ux,uy);
+ PlotMesh(T,X,elementType,'k-');
+eval(sprintf('saveas(gcf,''%s/vectorGradU_k%d_P%d.png'')',scratchfolder,kk,elementDegree));
 
 % write vtk file for paraview
-mat2vtk(u,[ux,uy],T,X);
+mat2vtk(u,[ux,uy],T,X,elementDegree);

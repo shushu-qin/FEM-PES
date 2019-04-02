@@ -10,35 +10,29 @@ for j = 1:2
         g = 1;
     end
     if elementDegree ==1
-        for i = 1:(size(Nborder,1)-1)
+        for i = 1:(size(Nborder,1))
             fe = zeros(2,1);
-            X1 = X(Nborder(i),:);
-            X2 = X(Nborder(i+1),:);
-            lengthSide = norm(X2-X1);
+            X1 = X(Nborder(i,1),:);
+            X2 = X(Nborder(i,2),:);
+            
             nIntPoints = 1;
             shapeFun = ShapeFunc1D(elementDegree);
             zgp = shapeFun.zgp; 
             wgp = shapeFun.wgp; 
             N = shapeFun.N; 
             Nxi =shapeFun.Nxi;
-
+            lengthSide = norm(X2-X1);
             Xe = [X1;X2];
-            xe = Xe(:,1); ye = Xe(:,2);
             for ig = 1:length(wgp)
                 N_ig    = N(ig,:);
                 Nxi_ig    = Nxi(ig,:);
-                x_ig = N_ig*Xe;
                 %Jacobian matrix
                 J = lengthSide/2; %Jacobian in 1D             
                 dlength=wgp(ig)*J;
                 fe = fe + g*N_ig'*dlength;
             end
-%             indx = Nborder(i,1):Nborder(i+1,1);
-%             f(indx)= f(indx) + fe;
-            indx1 = Nborder(i,1);
-            indx2 = Nborder(i+1,1);
-            f(indx1)= f(indx1) + fe(1);
-            f(indx2)= f(indx2) + fe(2);
+            indx = Nborder(i,:);
+            f(indx)= f(indx) + fe;
         end
     elseif elementDegree == 2
         for i = 1:length(Nborder)
@@ -60,10 +54,9 @@ for j = 1:2
             for ig = 1:length(wgp)
                 N_ig    = N(ig,:);
                 Nxi_ig    = Nxi(ig,:);
-                x_ig = N_ig*Xe;
                 %Jacobian matrix
-                J = Nxi_ig*Xe(:,1); %Jacobian in 1D             
-                dlength=wgp(ig)*J;
+                J = Nxi_ig*Xe; %Jacobian in 1D  
+                dlength=wgp(ig)*norm(J);
                 fe = fe + g*N_ig'*dlength;
             end
             indx = Nborder(i,:);
