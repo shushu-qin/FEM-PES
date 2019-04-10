@@ -14,8 +14,6 @@ for j = 1:2
             fe = zeros(2,1);
             X1 = X(Nborder(i,1),:);
             X2 = X(Nborder(i,2),:);
-            
-            nIntPoints = 1;
             shapeFun = ShapeFunc1D(elementDegree);
             zgp = shapeFun.zgp; 
             wgp = shapeFun.wgp; 
@@ -42,7 +40,6 @@ for j = 1:2
             X3 = X(Nborder(i,3),:);
             lengthSide = norm(X3-X1);
 %             Xb = (Nborder(i+1,2:3)+Nborder(i,2:3))/2;
-            nIntPoints = 1;
             shapeFun = ShapeFunc1D(elementDegree);
             zgp = shapeFun.zgp; 
             wgp = shapeFun.wgp; 

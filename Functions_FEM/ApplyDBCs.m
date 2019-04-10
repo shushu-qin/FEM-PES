@@ -1,4 +1,4 @@
-function C = ApplyDBCs(X,Example,tol_h)
+function C = ApplyDBCs(X,Example)
 %
 % C = ApplyDBCs(X,Example,tol_h)
 % C: two-column matrix with the imposed degreess of freedom in the first

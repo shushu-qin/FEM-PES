@@ -25,6 +25,7 @@ fprintf(fileID,'DATASET UNSTRUCTURED_GRID\n\n');
 
 % print nodes
 numNodes = size(X,1);
+numElems = size(T,1);
 fprintf(fileID,'POINTS      %5d     float\n',numNodes);
 for i = 1:numNodes
     fprintf(fileID,'%16.8e      %16.8e     %16.8e  \n',X(i,:),0);
@@ -42,6 +43,14 @@ if numVertices == 4
 elseif numVertices == 3
     for i = 1:numCells
         fprintf(fileID,'%5d   %5d   %5d   %5d   \n',numVertices,T(i,:)-ones(1,numVertices));
+    end
+elseif numVertices == 6
+    for i = 1:numCells
+        fprintf(fileID,'%5d   %5d   %5d   %5d  %5d %5d %5d\n',numVertices,T(i,:)-ones(1,numVertices));
+    end
+elseif numVertices == 9
+    for i = 1:numCells
+        fprintf(fileID,'%5d   %5d   %5d   %5d  %5d %5d %5d %5d %5d %5d\n',numVertices,T(i,:)-ones(1,numVertices));
     end
 end
 fprintf(fileID,'\n');
@@ -63,11 +72,11 @@ end
 fprintf(fileID,'\n');
 
 % % print velocity vector
-% fprintf(fileID,'VECTORS velo float\n');
-% for i = 1:numNodes
-%     fprintf(fileID,'%16.8e     %16.8e     %16.8e  \n',v(i,:),0);
-% end
-% fprintf(fileID,'\n');
-% fclose(fileID);
+fprintf(fileID,'VECTORS velo float\n');
+for i = 1:numNodes
+    fprintf(fileID,'%16.8e     %16.8e     %16.8e  \n',v(i,:),0);
+end
+fprintf(fileID,'\n');
+fclose(fileID);
 
 

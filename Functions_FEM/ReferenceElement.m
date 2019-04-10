@@ -11,11 +11,11 @@ if elementType == 1
     if elementDegree == 1
         nen = 3;
         Element.name   ='TRIP1'; %%%%%%
-        ngaus = 1;
+        ngaus = 3;
     elseif elementDegree == 2
         nen = 6;
         Element.name   = 'TRIP2'; %%%%%%
-        ngaus = 3;
+        ngaus = 4;
     else
         error ('Error in ShapeFunc: unavailable triangle');
     end
