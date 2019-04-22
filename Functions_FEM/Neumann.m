@@ -1,13 +1,13 @@
-function res = Neumann(f,X,Example,elementDegree)
+function res = Neumann(f,X,Example,elementDegree,Inflow_NeumanBC,Outflow_NeumannBC)
 inflowEdges = Example.inflowEdges;
 outflowEdges = Example.outflowEdges;
 for j = 1:2
     if j==1
         Nborder = inflowEdges;
-        g = -1;
+        g = Inflow_NeumanBC;
     elseif j==2
         Nborder = outflowEdges;
-        g = 1;
+        g = Outflow_NeumannBC;
     end
     if elementDegree ==1
         for i = 1:(size(Nborder,1))
